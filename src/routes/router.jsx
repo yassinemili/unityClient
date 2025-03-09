@@ -4,6 +4,8 @@ import Layout from "../layouts/layout.jsx";
 // import { DashboardLayout } from "./layouts/DashboardLayout.jsx";
 // import AuthLayout from "./layouts/AuthLayout.jsx";
 import NotFound from "../pages/NotFound.jsx";
+import Login from "../pages/login.jsx";
+import Register from "../pages/register.jsx";
 
 export const router = createBrowserRouter([
   {
@@ -11,11 +13,6 @@ export const router = createBrowserRouter([
     element: <Layout />,
     children: [
       // { path: "", element: <Home /> },
-      // {
-      //   path: "auth",
-      //   element: <AuthLayout />,
-      //   children: [{ path: "login", element: <Login /> }],
-      // },
       // {
       //   path: "dashboard",
       //   element: <ProtectedRoute element={<DashboardLayout />} />,
@@ -47,6 +44,14 @@ export const router = createBrowserRouter([
       //   ],
       // },
     ],
+  },
+  {
+    path: "login",
+    element: <Login />,
+  },
+  {
+    path: "register",
+    element: <Register />,
   },
   { path: "*", element: <NotFound /> },
 ]);
