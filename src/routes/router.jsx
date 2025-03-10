@@ -1,11 +1,12 @@
 import { createBrowserRouter } from "react-router-dom";
-// import Login from "./pages/auth/Login";
+
 import Layout from "../layouts/layout.jsx";
-// import { DashboardLayout } from "./layouts/DashboardLayout.jsx";
-// import AuthLayout from "./layouts/AuthLayout.jsx";
+import RegisterLayout from "../layouts/RegisterLayout.jsx";
+
 import NotFound from "../pages/NotFound.jsx";
 import Login from "../pages/login.jsx";
-import Register from "../pages/register.jsx";
+import CompanyRegister from "../pages/registerations/CompanyRegister.jsx";
+import EmployeeRegister from "../pages/registerations/EmployeeRegister.jsx";
 
 export const router = createBrowserRouter([
   {
@@ -51,7 +52,11 @@ export const router = createBrowserRouter([
   },
   {
     path: "register",
-    element: <Register />,
+    element: <RegisterLayout />,
+    children: [
+      { path: "company", element: <CompanyRegister /> },
+      { path: "employee", element: <EmployeeRegister /> },
+    ],
   },
   { path: "*", element: <NotFound /> },
 ]);
