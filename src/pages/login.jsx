@@ -23,13 +23,13 @@ export default function Login() {
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
-  
+
   const { login } = useAuth();
 
   const onSubmit = async (data) => {
     try {
-      const result = await login(data);
-      console.log("Login successful:", result);
+      const response = await login(data);
+      console.log("Login successful:", response);
       window.location.href = "/";
     } catch (error) {
       console.log("Login error:", error);
@@ -61,12 +61,10 @@ export default function Login() {
                 type="text"
                 className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm"
               />
-              {errors.username && (
-                <p className="text-red-500 text-sm">
-                  {errors.username.message}
-                </p>
-              )}
             </div>
+            {errors.username && (
+              <p className="text-red-500 text-sm">{errors.username.message}</p>
+            )}
           </div>
 
           <div>
@@ -104,12 +102,10 @@ export default function Login() {
                   <EyeIcon className="w-5 h-5" />
                 )}
               </button>
-              {errors.password && (
-                <p className="text-red-500 text-sm">
-                  {errors.password.message}
-                </p>
-              )}
             </div>
+            {errors.password && (
+              <p className="text-red-500 text-sm">{errors.password.message}</p>
+            )}
           </div>
 
           <div>
