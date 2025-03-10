@@ -9,16 +9,27 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
   const login = async (credentials) => {
+
+    if (!credentials.username || !credentials.password) {
+      throw new Error("Username and password are required");
+    }
+
+
+    if (token || user) {
+      throw new Error("User is already logged in");
+    }
+
     try {
-      console.log(credentials);
       const response = await axios.post(
         "http://localhost:5001/api/v1/auth/login",
         credentials,
         { withCredentials: true }
       );
+
       const { accessToken, user } = response.data;
       setToken(accessToken);
       setUser(user);
+      localStorage.setItem("user", JSON.stringify(user));
       return response.data;
     } catch (error) {
       console.error("Login failed:", error.response?.data || error.message);
@@ -27,9 +38,14 @@ const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
+    axios.post(
+      "http://localhost:5001/api/v1/auth/logout",
+      {},
+      { withCredentials: true }
+    );
     setToken(null);
     setUser(null);
-    window.location.href = "/login";
+    window.location.href = "/";
   };
 
   return (
