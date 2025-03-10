@@ -1,10 +1,10 @@
+// src/pages/Login.jsx
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
+import { useAuth } from "../hooks/useAuth";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 
 // Validation Schema
@@ -23,32 +23,23 @@ export default function Login() {
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
+  
+  const { login } = useAuth();
 
-  const mutation = useMutation({
-    mutationFn: async (data) => {
-      const response = await axios.post(
-        "http://localhost:5001/api/v1/auth/login",
-        data
-      );
-      return response.data;
-    },
-    onSuccess: (data) => {
-      console.log("Login successful:", data);
+  const onSubmit = async (data) => {
+    try {
+      const result = await login(data);
+      console.log("Login successful:", result);
       window.location.href = "/";
-    },
-    onError: (error) => {
-      console.error("Login failed:", error.response?.data || error.message);
-    },
-  });
-
-  const onSubmit = (data) => {
-    mutation.mutate(data);
+    } catch (error) {
+      console.log("Login error:", error);
+    }
   };
 
   return (
-    <div className="flex min-h-screen flex-1 flex-col justify-center items-center px-6 py-12 lg:px-8">
+    <div className="flex min-h-screen flex-col justify-center items-center px-6 py-12 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-        {/* put you logo here */}
+        {/* Logo can be added here */}
         <h2 className="mt-10 text-center text-2xl font-bold text-gray-900">
           Sign in to your account
         </h2>
@@ -125,9 +116,8 @@ export default function Login() {
             <button
               type="submit"
               className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-indigo-600 cursor-pointer"
-              disabled={mutation.isLoading}
             >
-              {mutation.isLoading ? "Signing in..." : "Sign in"}
+              Sign in
             </button>
           </div>
         </form>
