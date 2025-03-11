@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-    /* Primary Blue Palette (Dominant, 60%) */
+    /* Primary Blue Palette (Main UI, 60%) */
     --color-primary-50:  #EBF8FF;
     --color-primary-100: #CCE7FF;
     --color-primary-200: #99CEFF;
@@ -12,22 +12,20 @@
     --color-primary-700: #0055CC;
     --color-primary-800: #0043B3;
     --color-primary-900: #003099;
-  
-    /* Secondary Neutral Palette (Light Gray/Off-White, 30%)  
-       (Using a Bootstrap‑inspired gray scale) */
-    --color-secondary-50:  #F8F9FA; /* Base provided */
-    --color-secondary-100: #E9ECEF;
-    --color-secondary-200: #DEE2E6;
-    --color-secondary-300: #CED4DA;
-    --color-secondary-400: #ADB5BD;
-    --color-secondary-500: #6C757D;
-    --color-secondary-600: #495057;
-    --color-secondary-700: #343A40;
-    --color-secondary-800: #212529;
-    --color-secondary-900: #121416;
-  
-    /* Accent Amber Palette (Vibrant, 10%)  
-       (Based on a common Material Design amber scale) */
+
+    /* Indigo Palette (Secondary UI, 20%) */
+    --color-indigo-50:  #EEF2FF;
+    --color-indigo-100: #E0E7FF;
+    --color-indigo-200: #C7D2FE;
+    --color-indigo-300: #A5B4FC;
+    --color-indigo-400: #818CF8;
+    --color-indigo-500: #6366F1; /* Base */
+    --color-indigo-600: #4F46E5;
+    --color-indigo-700: #4338CA;
+    --color-indigo-800: #3730A3;
+    --color-indigo-900: #312E81;
+
+    /* Accent Amber Palette (Highlights, 10%) */
     --color-accent-50:  #FFF8E1;
     --color-accent-100: #FFECB3;
     --color-accent-200: #FFE082;
@@ -38,9 +36,20 @@
     --color-accent-700: #FFA000;
     --color-accent-800: #FF8F00;
     --color-accent-900: #FF6F00;
-  
-    /* Additional Colors */
+
+    /* Neutral Palette (Backgrounds and Text) */
+    --color-neutral-50:  #F8F9FA;
+    --color-neutral-100: #E9ECEF;
+    --color-neutral-200: #DEE2E6;
+    --color-neutral-300: #CED4DA;
+    --color-neutral-400: #ADB5BD;
+    --color-neutral-500: #6C757D;
+    --color-neutral-600: #495057;
+    --color-neutral-700: #343A40;
+    --color-neutral-800: #212529;
+    --color-neutral-900: #121416;
+
+    /* Text and Background */
     --color-text: #212529;
     --color-background: #FFFFFF;
-  }
-  
+}
