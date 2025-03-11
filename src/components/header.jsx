@@ -22,6 +22,7 @@ import {
   CurrencyDollarIcon,
 } from "../../node_modules/@heroicons/react/20/solid";
 import { Link } from "react-router";
+/* import { useAuth } from "../hooks/useAuth"; */
 
 const products = [
   {
@@ -50,6 +51,8 @@ function classNames(...classes) {
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  /* const { user, logout } = useAuth(); */
 
   return (
     <header className="bg-white">
