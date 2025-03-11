@@ -82,11 +82,11 @@ export default function CompanyRegister() {
   };
 
   const inputClass =
-    "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm";
+    "block w-full rounded-md bg-white px-3 py-1.5 text-base text-neutral-900 outline-1 outline-neutral-300 placeholder:text-neutral-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm";
 
   return (
-    <div className="min-h-full flex flex-col items-center justify-center ">
-      <div className="w-full max-w-md">
+    <div className="flex min-h-full flex-col justify-center items-center w-full">
+      <div className="sm:mx-auto w-full max-w-sm">
         <h1 className="text-3xl font-bold mb-6 text-center">
           Register Your Company
         </h1>
@@ -99,7 +99,7 @@ export default function CompanyRegister() {
                   className={`w-10 h-10 flex items-center justify-center rounded-full font-bold ${
                     index <= currentStep
                       ? "bg-indigo-600 text-white"
-                      : "bg-gray-300 text-gray-700"
+                      : "bg-neutral-300 text-neutral-700"
                   }`}
                 >
                   {index + 1}
@@ -117,7 +117,7 @@ export default function CompanyRegister() {
               <div className="mb-4">
                 <label
                   htmlFor="company.name"
-                  className="block text-sm font-medium text-gray-900"
+                  className="block text-sm font-medium text-neutral-900"
                 >
                   Company Name
                 </label>
@@ -126,6 +126,7 @@ export default function CompanyRegister() {
                     id="company.name"
                     {...register("company.name")}
                     type="text"
+                    placeholder="Company Name"
                     className={inputClass}
                   />
                 </div>
@@ -138,7 +139,7 @@ export default function CompanyRegister() {
               <div className="mb-4">
                 <label
                   htmlFor="company.address"
-                  className="block text-sm font-medium text-gray-900"
+                  className="block text-sm font-medium text-neutral-900"
                 >
                   Address
                 </label>
@@ -147,6 +148,7 @@ export default function CompanyRegister() {
                     id="company.address"
                     {...register("company.address")}
                     type="text"
+                    placeholder="Address"
                     className={inputClass}
                   />
                 </div>
@@ -159,7 +161,7 @@ export default function CompanyRegister() {
               <div className="mb-4">
                 <label
                   htmlFor="company.contactEmail"
-                  className="block text-sm font-medium text-gray-900"
+                  className="block text-sm font-medium text-neutral-900"
                 >
                   Contact Email
                 </label>
@@ -168,6 +170,7 @@ export default function CompanyRegister() {
                     id="company.contactEmail"
                     {...register("company.contactEmail")}
                     type="email"
+                    placeholder="Email"
                     className={inputClass}
                   />
                 </div>
@@ -186,7 +189,7 @@ export default function CompanyRegister() {
               <div className="mb-4">
                 <label
                   htmlFor="employee.firstName"
-                  className="block text-sm font-medium text-gray-900"
+                  className="block text-sm font-medium text-neutral-900"
                 >
                   First Name
                 </label>
@@ -195,6 +198,7 @@ export default function CompanyRegister() {
                     id="employee.firstName"
                     {...register("employee.firstName")}
                     type="text"
+                    placeholder="First Name"
                     className={inputClass}
                   />
                 </div>
@@ -207,7 +211,7 @@ export default function CompanyRegister() {
               <div className="mb-4">
                 <label
                   htmlFor="employee.lastName"
-                  className="block text-sm font-medium text-gray-900"
+                  className="block text-sm font-medium text-neutral-900"
                 >
                   Last Name
                 </label>
@@ -216,6 +220,7 @@ export default function CompanyRegister() {
                     id="employee.lastName"
                     {...register("employee.lastName")}
                     type="text"
+                    placeholder="Last Name"
                     className={inputClass}
                   />
                 </div>
@@ -228,7 +233,7 @@ export default function CompanyRegister() {
               <div className="mb-4">
                 <label
                   htmlFor="employee.email"
-                  className="block text-sm font-medium text-gray-900"
+                  className="block text-sm font-medium text-neutral-900"
                 >
                   Employee Email
                 </label>
@@ -237,6 +242,7 @@ export default function CompanyRegister() {
                     id="employee.email"
                     {...register("employee.email")}
                     type="email"
+                    placeholder="Email"
                     className={inputClass}
                   />
                 </div>
@@ -255,7 +261,7 @@ export default function CompanyRegister() {
               <div className="mb-4">
                 <label
                   htmlFor="user.username"
-                  className="block text-sm font-medium text-gray-900"
+                  className="block text-sm font-medium text-neutral-900"
                 >
                   Username
                 </label>
@@ -264,6 +270,7 @@ export default function CompanyRegister() {
                     id="user.username"
                     {...register("user.username")}
                     type="text"
+                    placeholder="Username"
                     className={inputClass}
                   />
                 </div>
@@ -276,7 +283,7 @@ export default function CompanyRegister() {
               <div className="mb-4">
                 <label
                   htmlFor="user.password"
-                  className="block text-sm font-medium text-gray-900"
+                  className="block text-sm font-medium text-neutral-900"
                 >
                   Password
                 </label>
@@ -285,6 +292,7 @@ export default function CompanyRegister() {
                     id="user.password"
                     {...register("user.password")}
                     type="password"
+                    placeholder="Password"
                     className={inputClass}
                   />
                 </div>
@@ -302,7 +310,7 @@ export default function CompanyRegister() {
               <button
                 type="button"
                 onClick={handleBack}
-                className="px-4 py-2 bg-gray-300 text-gray-700 rounded-md"
+                className="px-4 py-2 bg-neutral-300 text-neutral-700 rounded-md"
               >
                 Back
               </button>
@@ -311,21 +319,21 @@ export default function CompanyRegister() {
               <button
                 type="button"
                 onClick={handleNext}
-                className="ml-auto px-4 py-2 bg-indigo-600 text-white rounded-md"
+                className="ml-auto px-4 py-2 bg-indigo-600 text-white rounded-md cursor-pointer"
               >
                 Next
               </button>
             ) : (
               <button
                 type="submit"
-                className="ml-auto px-4 py-2 bg-green-600 text-white rounded-md"
+                className="ml-auto px-4 py-2 bg-primary-600 text-white rounded-md cursor-pointer"
               >
                 Register
               </button>
             )}
           </div>
         </form>
-        <p className="mt-4 text-center text-sm text-gray-500">
+        <p className="mt-4 text-center text-sm text-neutral-500">
           Already have an account?{" "}
           <Link
             to="/login"

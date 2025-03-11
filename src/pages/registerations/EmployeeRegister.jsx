@@ -45,18 +45,18 @@ export default function RegisterNested() {
   };
 
   return (
-    <div className="flex min-h-screen flex-col justify-center items-center px-6 py-12 lg:px-8 ">
+    <div className="flex min-h-full flex-col justify-center items-center min-w-full">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-        <h2 className="mt-10 text-center text-2xl font-bold text-gray-900">
+        <h2 className="mt-10 text-center text-2xl font-bold text-neutral-900">
           Create your account
         </h2>
       </div>
-      <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+      <div className="mt-10 sm:mx-auto w-full max-w-sm">
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           <div>
             <label
               htmlFor="user.username"
-              className="block text-sm font-medium text-gray-900"
+              className="block text-sm font-medium text-neutral-900"
             >
               Username
             </label>
@@ -65,7 +65,8 @@ export default function RegisterNested() {
                 id="user.username"
                 {...register("user.username")}
                 type="text"
-                className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm"
+                placeholder="Username"
+                className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-neutral-900 outline-1 outline-neutral-300 placeholder:text-neutral-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm"
               />
               {errors.user?.username && (
                 <p className="text-red-500 text-sm">
@@ -78,7 +79,7 @@ export default function RegisterNested() {
           <div>
             <label
               htmlFor="user.password"
-              className="block text-sm font-medium text-gray-900"
+              className="block text-sm font-medium text-neutral-900"
             >
               Password
             </label>
@@ -87,12 +88,13 @@ export default function RegisterNested() {
                 id="user.password"
                 {...register("user.password")}
                 type={showPassword ? "text" : "password"}
-                className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm"
+                placeholder="Password"
+                className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-neutral-900 outline-1 outline-neutral-300 placeholder:text-neutral-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute inset-y-0 right-2 flex items-center text-gray-500 hover:text-gray-700"
+                className="absolute inset-y-0 right-2 flex items-center text-neutral-500 hover:text-neutral-700 cursor-pointer"
               >
                 {showPassword ? (
                   <EyeSlashIcon className="w-5 h-5" />
@@ -111,7 +113,7 @@ export default function RegisterNested() {
           <div>
             <label
               htmlFor="user.confirmPassword"
-              className="block text-sm font-medium text-gray-900"
+              className="block text-sm font-medium text-neutral-900"
             >
               Confirm Password
             </label>
@@ -120,12 +122,13 @@ export default function RegisterNested() {
                 id="user.confirmPassword"
                 {...register("user.confirmPassword")}
                 type={showPassword ? "text" : "password"}
-                className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm"
+                placeholder="Confirm Password"
+                className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-neutral-900 outline-1 outline-neutral-300 placeholder:text-neutral-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute inset-y-0 right-2 flex items-center text-gray-500 hover:text-gray-700"
+                className="absolute inset-y-0 right-2 flex items-center text-gray-500 hover:text-gray-700 cursor-pointer"
               >
                 {showPassword ? (
                   <EyeSlashIcon className="w-5 h-5" />
@@ -144,7 +147,7 @@ export default function RegisterNested() {
           <div>
             <label
               htmlFor="user.employeeId"
-              className="block text-sm font-medium text-gray-900"
+              className="block text-sm font-medium text-neutral-900"
             >
               Employee ID
             </label>
@@ -153,7 +156,8 @@ export default function RegisterNested() {
                 id="user.employeeId"
                 {...register("user.employeeId")}
                 type="text"
-                className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm"
+                placeholder="Employee ID"
+                className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-neutral-900 outline-1 outline-neutral-300 placeholder:text-neutral-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm"
               />
               {errors.user?.employeeId && (
                 <p className="text-red-500 text-sm">
@@ -174,7 +178,7 @@ export default function RegisterNested() {
           </div>
         </form>
 
-        <p className="mt-10 text-center text-sm text-gray-500">
+        <p className="mt-10 text-center text-sm text-neutral-500">
           Already have an account?{" "}
           <Link
             to="/login"
