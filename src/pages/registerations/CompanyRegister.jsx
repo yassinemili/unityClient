@@ -51,7 +51,7 @@ export default function CompanyRegister() {
 
   const onSubmit = (data) => {
     console.log("Registration Data:", data);
-    // Add your API call for registration here.
+    
   };
 
   // Validate fields of the current step before moving to next
