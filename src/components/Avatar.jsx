@@ -5,7 +5,11 @@ const Avatar = () => {
   const { user, logout } = useAuth();
 
   const handleLogout = async () => {
-    await logout();
+    try {
+      await logout();
+    } catch (error) {
+      console.log("Logout error:", error);
+    }
   };
 
   const getInitial = (user) => {

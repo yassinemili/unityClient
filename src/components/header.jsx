@@ -53,15 +53,8 @@ function classNames(...classes) {
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const { user, logout } = useAuth();
+  const { user } = useAuth();
 
-  const handleLogout = async () => {
-    try {
-      await logout();
-    } catch (error) {
-      console.log("Logout error:", error);
-    }
-  };
   return (
     <header className="bg-white">
       <nav
@@ -231,14 +224,7 @@ export default function Header() {
                 </Link>
               </div>
               <div className="py-6">
-                {user ? (
-                  <button
-                    onClick={handleLogout}
-                    className="-mx-3 w-full rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-neutral-900 hover:bg-neutral-50"
-                  >
-                    Logout
-                  </button>
-                ) : (
+                {!user && (
                   <Link
                     to="/login"
                     className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-neutral-900 hover:bg-neutral-50"
