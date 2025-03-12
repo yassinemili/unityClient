@@ -24,6 +24,7 @@ import {
 import { Link } from "react-router";
 import { useAuth } from "../hooks/useAuth";
 import Avatar from "./Avatar";
+import Separator from "./Separator";
 
 const products = [
   {
@@ -96,28 +97,30 @@ export default function Header() {
               leaveFrom="opacity-100 translate-y-0"
               leaveTo="opacity-0 translate-y-1"
             >
-              <PopoverPanel className="absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5">
+              <PopoverPanel className="absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-neutral-900/5">
                 <div className="p-4">
                   {products.map((item) => (
                     <div
                       key={item.name}
-                      className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-50"
+                      className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-neutral-50"
                     >
                       <div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
                         <item.icon
-                          className="h-6 w-6 text-gray-600 group-hover:text-indigo-600"
+                          className="h-6 w-6 text-neutral-600 group-hover:text-accent-600"
                           aria-hidden="true"
                         />
                       </div>
                       <div className="flex-auto">
                         <Link
                           to={item.href}
-                          className="block font-semibold text-gray-900"
+                          className="block font-semibold text-neutral-900"
                         >
                           {item.name}
                           <span className="absolute inset-0" />
                         </Link>
-                        <p className="mt-1 text-gray-600">{item.description}</p>
+                        <p className="mt-1 text-neutral-600">
+                          {item.description}
+                        </p>
                       </div>
                     </div>
                   ))}
@@ -128,27 +131,35 @@ export default function Header() {
 
           <Link
             to="/"
-            className="text-sm font-semibold leading-6 text-gray-900"
+            className="text-sm font-semibold leading-6 text-neutral-900"
           >
             Features
           </Link>
           <Link
             to="/"
-            className="text-sm font-semibold leading-6 text-gray-900"
+            className="text-sm font-semibold leading-6 text-neutral-900"
           >
             Company
           </Link>
         </PopoverGroup>
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+        <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:items-center lg:gap-3">
           {user ? (
             <Avatar />
           ) : (
-            <Link
-              to="/login"
-              className="text-sm font-semibold leading-6 text-gray-900"
-            >
-              Log in <span aria-hidden="true">&rarr;</span>
-            </Link>
+            <>
+              <Link
+                to="/login"
+                className="text-sm hover:opacity-90 font-semibold leading-6 text-neutral-900"
+              >
+                Log in
+              </Link>
+              <Link
+                to="register"
+                className="bg-primary-500 hover:opacity-90 px-4 py-1.5 text-sm font-semibold leading-6 text-neutral-50 rounded-md"
+              >
+                Sign up
+              </Link>
+            </>
           )}
         </div>
       </nav>
@@ -158,21 +169,21 @@ export default function Header() {
         onClose={setMobileMenuOpen}
       >
         <div className="fixed inset-0 z-10" />
-        <DialogPanel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+        <DialogPanel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-neutral-900/10">
           <div className="flex items-center justify-between">
             <div className="-m-1.5 p-1.5">
               <span className="sr-only">unity</span>
               {user ? (
                 <Avatar className="h-6 w-6" />
               ) : (
-                <p className="text-lg font-semibold leading-7 text-indigo-600">
+                <p className="text-lg font-semibold leading-7 text-primary-600">
                   unity
                 </p>
               )}
             </div>
             <button
               type="button"
-              className="-m-2.5 rounded-md p-2.5 text-gray-700"
+              className="-m-2.5 rounded-md p-2.5 text-neutral-700"
               onClick={() => setMobileMenuOpen(false)}
             >
               <span className="sr-only">Close menu</span>
@@ -180,12 +191,12 @@ export default function Header() {
             </button>
           </div>
           <div className="mt-6 flow-root">
-            <div className="-my-6 divide-y divide-gray-500/10">
+            <div className="-my-6 divide-y divide-neutral-500/10">
               <div className="space-y-2 py-6">
                 <Disclosure as="div" className="-mx-3">
                   {({ open }) => (
                     <>
-                      <DisclosureButton className="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
+                      <DisclosureButton className="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-neutral-900 hover:bg-neutral-50">
                         Product
                         <ChevronDownIcon
                           className={classNames(
@@ -201,7 +212,7 @@ export default function Header() {
                             key={item.name}
                             as="a"
                             href={item.href}
-                            className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                            className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-neutral-900 hover:bg-neutral-50"
                           >
                             {item.name}
                           </DisclosureButton>
@@ -212,25 +223,34 @@ export default function Header() {
                 </Disclosure>
                 <Link
                   to="/"
-                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-neutral-900 hover:bg-neutral-50"
                 >
                   Features
                 </Link>
                 <Link
                   to="/"
-                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-neutral-900 hover:bg-neutral-50"
                 >
                   Company
                 </Link>
               </div>
               <div className="py-6">
                 {!user && (
-                  <Link
-                    to="/login"
-                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-neutral-900 hover:bg-neutral-50"
-                  >
-                    Log in
-                  </Link>
+                  <>
+                    <Link
+                      to="/login"
+                      className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-center text-neutral-900 hover:bg-neutral-50"
+                    >
+                      Log in
+                    </Link>
+                    <Separator />
+                    <Link
+                      to="/register"
+                      className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-center text-neutral-900 hover:bg-neutral-50"
+                    >
+                      Sign up
+                    </Link>
+                  </>
                 )}
               </div>
             </div>
