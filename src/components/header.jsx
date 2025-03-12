@@ -22,7 +22,8 @@ import {
   CurrencyDollarIcon,
 } from "../../node_modules/@heroicons/react/20/solid";
 import { Link } from "react-router";
-/* import { useAuth } from "../hooks/useAuth"; */
+import { useAuth } from "../hooks/useAuth";
+import Avatar from "./Avatar";
 
 const products = [
   {
@@ -52,8 +53,15 @@ function classNames(...classes) {
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  /* const { user, logout } = useAuth(); */
+  const { user, logout } = useAuth();
 
+  const handleLogout = async () => {
+    try {
+      await logout();
+    } catch (error) {
+      console.log("Logout error:", error);
+    }
+  };
   return (
     <header className="bg-white">
       <nav
@@ -62,7 +70,7 @@ export default function Header() {
       >
         <div className="flex lg:flex-1">
           <Link to="/" target="_blank" className="-m-1.5 p-1.5">
-            <p className="text-lg font-semibold leading-7 text-indigo-600 tracking-wider ">
+            <p className="text-xl font-bold leading-7 text-primary-600 tracking-wider ">
               unity
             </p>
           </Link>
@@ -70,7 +78,7 @@ export default function Header() {
         <div className="flex lg:hidden">
           <button
             type="button"
-            className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+            className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-neutral-700"
             onClick={() => setMobileMenuOpen(true)}
           >
             <span className="sr-only">Open main menu</span>
@@ -79,10 +87,10 @@ export default function Header() {
         </div>
         <PopoverGroup className="hidden lg:flex lg:gap-x-12">
           <Popover className="relative">
-            <PopoverButton className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
+            <PopoverButton className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-neutral-900">
               Product
               <ChevronDownIcon
-                className="h-5 w-5 flex-none text-gray-400"
+                className="h-5 w-5 flex-none text-neutral-400"
                 aria-hidden="true"
               />
             </PopoverButton>
@@ -139,12 +147,16 @@ export default function Header() {
           </Link>
         </PopoverGroup>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <Link
-            to="/login"
-            className="text-sm font-semibold leading-6 text-gray-900"
-          >
-            Log in <span aria-hidden="true">&rarr;</span>
-          </Link>
+          {user ? (
+            <Avatar />
+          ) : (
+            <Link
+              to="/login"
+              className="text-sm font-semibold leading-6 text-gray-900"
+            >
+              Log in <span aria-hidden="true">&rarr;</span>
+            </Link>
+          )}
         </div>
       </nav>
       <Dialog
@@ -155,19 +167,23 @@ export default function Header() {
         <div className="fixed inset-0 z-10" />
         <DialogPanel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
-            <Link to="/" className="-m-1.5 p-1.5">
+            <div className="-m-1.5 p-1.5">
               <span className="sr-only">unity</span>
-              <p className="text-lg font-semibold leading-7 text-indigo-600">
-                unity
-              </p>
-            </Link>
+              {user ? (
+                <Avatar className="h-6 w-6" />
+              ) : (
+                <p className="text-lg font-semibold leading-7 text-indigo-600">
+                  unity
+                </p>
+              )}
+            </div>
             <button
               type="button"
               className="-m-2.5 rounded-md p-2.5 text-gray-700"
               onClick={() => setMobileMenuOpen(false)}
             >
               <span className="sr-only">Close menu</span>
-              <XMarkIcon className="h-6 w-6" aria-hidden="true" />
+              <XMarkIcon className="h-8 w-8" aria-hidden="true" />
             </button>
           </div>
           <div className="mt-6 flow-root">
@@ -215,12 +231,21 @@ export default function Header() {
                 </Link>
               </div>
               <div className="py-6">
-                <Link
-                  to="/login"
-                  className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                >
-                  Log in
-                </Link>
+                {user ? (
+                  <button
+                    onClick={handleLogout}
+                    className="-mx-3 w-full rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-neutral-900 hover:bg-neutral-50"
+                  >
+                    Logout
+                  </button>
+                ) : (
+                  <Link
+                    to="/login"
+                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-neutral-900 hover:bg-neutral-50"
+                  >
+                    Log in
+                  </Link>
+                )}
               </div>
             </div>
           </div>
