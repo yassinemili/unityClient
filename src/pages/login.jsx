@@ -6,6 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useAuth } from "../hooks/useAuth";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
+import { useNavigate } from "react-router";
 
 // Validation Schema
 const schema = yup.object().shape({
@@ -24,13 +25,18 @@ export default function Login() {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
-  const { login } = useAuth();
+  const { user, login } = useAuth();
+  const navigate = useNavigate();
+
+  if (user) {
+    navigate("/");
+  }
 
   const onSubmit = async (data) => {
     try {
       const response = await login(data);
       console.log("Login successful:", response);
-      window.location.href = "/";
+      navigate("/");
     } catch (error) {
       console.log("Login error:", error);
     }
@@ -57,7 +63,7 @@ export default function Login() {
             <div className="mt-2">
               <input
                 id="username"
-                {...register("Username")}
+                {...register("username")}
                 type="text"
                 placeholder="Username"
                 className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-neutral-900 outline-1 outline-neutral-300 placeholder:text-neutral-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm"
@@ -109,6 +115,8 @@ export default function Login() {
               <p className="text-red-500 text-sm">{errors.password.message}</p>
             )}
           </div>
+
+          {onSubmit && <p className="text-red-500 text-sm">{login.error}</p>}
 
           <div>
             <button
