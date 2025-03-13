@@ -5,6 +5,7 @@ import RegisterLayout from "../layouts/RegisterLayout.jsx";
 
 import NotFound from "../pages/NotFound.jsx";
 import Login from "../pages/login.jsx";
+import Profiledit from "../pages/profile/page.jsx";
 import CompanyRegister from "../pages/registerations/CompanyRegister.jsx";
 import EmployeeRegister from "../pages/registerations/EmployeeRegister.jsx";
 
@@ -49,6 +50,10 @@ export const router = createBrowserRouter([
   {
     path: "login",
     element: <Login />,
+  },
+  {
+    path: "profileedit",
+    element: <Profiledit />,
   },
   {
     path: "register",

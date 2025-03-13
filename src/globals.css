@@ -1,0 +1,90 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Primary Blue Palette (Main UI, 60%) */
+    --color-primary-50: #ebf8ff;
+    --color-primary-100: #cce7ff;
+    --color-primary-200: #99ceff;
+    --color-primary-300: #66b5ff;
+    --color-primary-400: #339bff;
+    --color-primary-500: #007bff; /* Base */
+    --color-primary-600: #0068e6;
+    --color-primary-700: #0055cc;
+    --color-primary-800: #0043b3;
+    --color-primary-900: #003099;
+
+    /* Indigo Palette (Secondary UI, 20%) */
+    --color-indigo-50: #eef2ff;
+    --color-indigo-100: #e0e7ff;
+    --color-indigo-200: #c7d2fe;
+    --color-indigo-300: #a5b4fc;
+    --color-indigo-400: #818cf8;
+    --color-indigo-500: #6366f1; /* Base */
+    --color-indigo-600: #4f46e5;
+    --color-indigo-700: #4338ca;
+    --color-indigo-800: #3730a3;
+    --color-indigo-900: #312e81;
+
+    /* Accent Amber Palette (Highlights, 10%) */
+    --color-accent-50: #fff8e1;
+    --color-accent-100: #ffecb3;
+    --color-accent-200: #ffe082;
+    --color-accent-300: #ffd54f;
+    --color-accent-400: #ffca28;
+    --color-accent-500: #ffc107; /* Base */
+    --color-accent-600: #ffb300;
+    --color-accent-700: #ffa000;
+    --color-accent-800: #ff8f00;
+    --color-accent-900: #ff6f00;
+
+    /* Neutral Palette (Backgrounds and Text) */
+    --color-neutral-50: #f8f9fa;
+    --color-neutral-100: #e9ecef;
+    --color-neutral-200: #dee2e6;
+    --color-neutral-300: #ced4da;
+    --color-neutral-400: #adb5bd;
+    --color-neutral-500: #6c757d;
+    --color-neutral-600: #495057;
+    --color-neutral-700: #343a40;
+    --color-neutral-800: #212529;
+    --color-neutral-900: #121416;
+
+    /* Text and Background */
+    --color-text: #212529;
+    --color-background: #ffffff;
+
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.625rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
