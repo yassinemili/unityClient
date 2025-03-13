@@ -2,11 +2,12 @@ import { useState, useRef } from "react"
 import { Button } from "../../components/ui/button"
 import { Input } from "../../components/ui/input"
 import { Label } from "../../components/ui/label"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../components/ui/select"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../components/ui/tabs.jsx"
+import { Switch } from "../../components/ui/switch"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../components/ui/tabs"
 import { Separator } from "../../components/ui/separator"
 import { Avatar, AvatarFallback, AvatarImage } from "../../components/ui/avatar"
-import { Eye, EyeOff, Save, Upload, User, Mail, Phone, MapPin, Calendar, Shield } from "lucide-react"
+import { Badge } from "../../components/ui/badge"
+import { Eye, EyeOff, Save, Upload, User, Mail, Briefcase, Building2, Users } from "lucide-react"
 
 export default function UserProfileEdit() {
   const [isLoading, setIsLoading] = useState(false)
@@ -14,16 +15,32 @@ export default function UserProfileEdit() {
   const fileInputRef = useRef(null)
 
   const [formData, setFormData] = useState({
-    username: "john_doe",
-    fullName: "John Doe",
+    firstName: "John",
+    lastName: "Doe",
     email: "john.doe@example.com",
-    phone: "+1 555 123 4567",
-    address: "New York, USA",
-    birthdate: "1990-05-15",
+    departmentId: "engineering",
+    companyId: "acme-corp",
+    jobTitle: "Senior Developer",
+    isActive: true,
     password: "",
-    accountStatus: "active",
     profileImage: "/placeholder.svg?height=150&width=150",
   })
+
+  // Mock data for departments and companies (for display only)
+  const departments = [
+    { id: "engineering", name: "Engineering" },
+    { id: "marketing", name: "Marketing" },
+    { id: "sales", name: "Sales" },
+    { id: "hr", name: "Human Resources" },
+    { id: "finance", name: "Finance" },
+  ]
+
+  const companies = [
+    { id: "acme-corp", name: "ACME Corporation" },
+    { id: "globex", name: "Globex Inc." },
+    { id: "initech", name: "Initech" },
+    { id: "umbrella", name: "Umbrella Corp" },
+  ]
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -33,10 +50,10 @@ export default function UserProfileEdit() {
     }))
   }
 
-  const handleStatusChange = (value) => {
+  const handleToggleChange = (checked) => {
     setFormData((prev) => ({
       ...prev,
-      accountStatus: value,
+      isActive: checked,
     }))
   }
 
@@ -77,25 +94,22 @@ export default function UserProfileEdit() {
     setShowPassword(!showPassword)
   }
 
-  const getStatusColor = (status) => {
-    switch (status) {
-      case "active":
-        return "bg-primary-500"
-      case "suspended":
-        return "bg-accent-500"
-      case "inactive":
-        return "bg-neutral-400"
-      default:
-        return "bg-neutral-400"
-    }
+  const getCompanyName = (id) => {
+    const company = companies.find((c) => c.id === id)
+    return company ? company.name : id
+  }
+
+  const getDepartmentName = (id) => {
+    const department = departments.find((d) => d.id === id)
+    return department ? department.name : id
   }
 
   return (
     <div className="container mx-auto py-8 px-4">
       <div className="max-w-5xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
         <div className="bg-primary-600 p-6 text-white">
-          <h1 className="text-2xl font-bold">User Profile</h1>
-          <p className="opacity-80">Manage your account information</p>
+          <h1 className="text-2xl font-bold">Employee Profile</h1>
+          <p className="opacity-80">Manage employee information</p>
         </div>
 
         <div className="grid md:grid-cols-[250px_1fr] gap-0">
@@ -103,12 +117,10 @@ export default function UserProfileEdit() {
           <div className="bg-neutral-50 p-6 border-r border-neutral-200 flex flex-col items-center">
             <div className="relative group mb-4">
               <Avatar className="w-32 h-32 border-4 border-white shadow-md">
-                <AvatarImage src={formData.profileImage} alt={formData.fullName} />
+                <AvatarImage src={formData.profileImage} alt={`${formData.firstName} ${formData.lastName}`} />
                 <AvatarFallback className="bg-primary-100 text-primary-600 text-2xl">
-                  {formData.fullName
-                    .split(" ")
-                    .map((n) => n[0])
-                    .join("")}
+                  {formData.firstName[0]}
+                  {formData.lastName[0]}
                 </AvatarFallback>
               </Avatar>
               <div
@@ -126,12 +138,18 @@ export default function UserProfileEdit() {
               </div>
             </div>
 
-            <h2 className="text-xl font-bold mt-2 text-center text-neutral-800">{formData.fullName}</h2>
-            <p className="text-neutral-500 text-center mb-4">@{formData.username}</p>
+            <h2 className="text-xl font-bold mt-2 text-center text-neutral-800">
+              {formData.firstName} {formData.lastName}
+            </h2>
+            <p className="text-neutral-500 text-center mb-2">{formData.jobTitle}</p>
 
             <div className="flex items-center gap-2 mb-4">
-              <div className={`w-3 h-3 rounded-full ${getStatusColor(formData.accountStatus)}`}></div>
-              <span className="text-sm capitalize text-neutral-600">{formData.accountStatus}</span>
+              <Badge
+                variant={formData.isActive ? "default" : "secondary"}
+                className={formData.isActive ? "bg-primary-500" : "bg-neutral-400"}
+              >
+                {formData.isActive ? "Active" : "Inactive"}
+              </Badge>
             </div>
 
             <Separator className="my-4 w-full bg-neutral-200" />
@@ -142,16 +160,16 @@ export default function UserProfileEdit() {
                 <span className="text-sm">{formData.email}</span>
               </div>
               <div className="flex items-center gap-2 text-neutral-600">
-                <Phone className="h-4 w-4 text-primary-500" />
-                <span className="text-sm">{formData.phone}</span>
+                <Building2 className="h-4 w-4 text-primary-500" />
+                <span className="text-sm">{getCompanyName(formData.companyId)}</span>
               </div>
               <div className="flex items-center gap-2 text-neutral-600">
-                <MapPin className="h-4 w-4 text-primary-500" />
-                <span className="text-sm">{formData.address}</span>
+                <Users className="h-4 w-4 text-primary-500" />
+                <span className="text-sm">{getDepartmentName(formData.departmentId)}</span>
               </div>
               <div className="flex items-center gap-2 text-neutral-600">
-                <Calendar className="h-4 w-4 text-primary-500" />
-                <span className="text-sm">{formData.birthdate}</span>
+                <Briefcase className="h-4 w-4 text-primary-500" />
+                <span className="text-sm">{formData.jobTitle}</span>
               </div>
             </div>
           </div>
@@ -167,10 +185,10 @@ export default function UserProfileEdit() {
                   Personal Information
                 </TabsTrigger>
                 <TabsTrigger
-                  value="account"
+                  value="company"
                   className="data-[state=active]:bg-primary-500 data-[state=active]:text-white"
                 >
-                  Account Settings
+                  Company Details
                 </TabsTrigger>
               </TabsList>
 
@@ -178,14 +196,14 @@ export default function UserProfileEdit() {
                 <TabsContent value="personal" className="space-y-6">
                   <div className="grid md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <Label htmlFor="fullName" className="text-neutral-700">
-                        Full Name
+                      <Label htmlFor="firstName" className="text-neutral-700">
+                        First Name
                       </Label>
                       <div className="relative">
                         <Input
-                          id="fullName"
-                          name="fullName"
-                          value={formData.fullName}
+                          id="firstName"
+                          name="firstName"
+                          value={formData.firstName}
                           onChange={handleChange}
                           className="pl-10 border-neutral-300"
                         />
@@ -194,18 +212,18 @@ export default function UserProfileEdit() {
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="username" className="text-neutral-700">
-                        Username
+                      <Label htmlFor="lastName" className="text-neutral-700">
+                        Last Name
                       </Label>
                       <div className="relative">
                         <Input
-                          id="username"
-                          name="username"
-                          value={formData.username}
+                          id="lastName"
+                          name="lastName"
+                          value={formData.lastName}
                           onChange={handleChange}
                           className="pl-10 border-neutral-300"
                         />
-                        <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-primary-500">@</span>
+                        <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-primary-500 h-4 w-4" />
                       </div>
                     </div>
 
@@ -226,59 +244,6 @@ export default function UserProfileEdit() {
                       </div>
                     </div>
 
-                    <div className="space-y-2">
-                      <Label htmlFor="phone" className="text-neutral-700">
-                        Phone Number
-                      </Label>
-                      <div className="relative">
-                        <Input
-                          id="phone"
-                          name="phone"
-                          value={formData.phone}
-                          onChange={handleChange}
-                          className="pl-10 border-neutral-300"
-                        />
-                        <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-primary-500 h-4 w-4" />
-                      </div>
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label htmlFor="address" className="text-neutral-700">
-                        Address
-                      </Label>
-                      <div className="relative">
-                        <Input
-                          id="address"
-                          name="address"
-                          value={formData.address}
-                          onChange={handleChange}
-                          className="pl-10 border-neutral-300"
-                        />
-                        <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 text-primary-500 h-4 w-4" />
-                      </div>
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label htmlFor="birthdate" className="text-neutral-700">
-                        Date of Birth
-                      </Label>
-                      <div className="relative">
-                        <Input
-                          id="birthdate"
-                          name="birthdate"
-                          type="date"
-                          value={formData.birthdate}
-                          onChange={handleChange}
-                          className="pl-10 border-neutral-300"
-                        />
-                        <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 text-primary-500 h-4 w-4" />
-                      </div>
-                    </div>
-                  </div>
-                </TabsContent>
-
-                <TabsContent value="account" className="space-y-6">
-                  <div className="grid md:grid-cols-2 gap-6">
                     <div className="space-y-2">
                       <Label htmlFor="password" className="text-neutral-700">
                         Password
@@ -304,23 +269,49 @@ export default function UserProfileEdit() {
                         </Button>
                       </div>
                     </div>
+                  </div>
+                </TabsContent>
+
+                <TabsContent value="company" className="space-y-6">
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <Label className="text-neutral-700">Company</Label>
+                      <div className="flex items-center p-2 border rounded-md border-neutral-200 bg-neutral-50">
+                        <Building2 className="h-4 w-4 text-primary-500 mr-2" />
+                        <span>{getCompanyName(formData.companyId)}</span>
+                      </div>
+                    </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="accountStatus" className="text-neutral-700">
-                        Account Status
+                      <Label className="text-neutral-700">Department</Label>
+                      <div className="flex items-center p-2 border rounded-md border-neutral-200 bg-neutral-50">
+                        <Users className="h-4 w-4 text-primary-500 mr-2" />
+                        <span>{getDepartmentName(formData.departmentId)}</span>
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label className="text-neutral-700">Job Title</Label>
+                      <div className="flex items-center p-2 border rounded-md border-neutral-200 bg-neutral-50">
+                        <Briefcase className="h-4 w-4 text-primary-500 mr-2" />
+                        <span>{formData.jobTitle}</span>
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="isActive" className="text-neutral-700">
+                        Status
                       </Label>
-                      <div className="relative">
-                        <Select value={formData.accountStatus} onValueChange={handleStatusChange}>
-                          <SelectTrigger id="accountStatus" className="pl-10 border-neutral-300">
-                            <SelectValue placeholder="Select account status" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="active">Active</SelectItem>
-                            <SelectItem value="suspended">Suspended</SelectItem>
-                            <SelectItem value="inactive">Inactive</SelectItem>
-                          </SelectContent>
-                        </Select>
-                        <Shield className="absolute left-3 top-1/2 transform -translate-y-1/2 text-primary-500 h-4 w-4" />
+                      <div className="flex items-center space-x-2 pt-2">
+                        <Switch
+                          id="isActive"
+                          checked={formData.isActive}
+                          onCheckedChange={handleToggleChange}
+                          className="data-[state=checked]:bg-primary-500"
+                        />
+                        <Label htmlFor="isActive" className="cursor-pointer">
+                          {formData.isActive ? "Active" : "Inactive"}
+                        </Label>
                       </div>
                     </div>
                   </div>
