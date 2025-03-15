@@ -1,6 +1,5 @@
-import React from "react";
-
-export function Button({ children, onClick, disabled, className }) {
+import PropTypes from "prop-types";
+function Button({ children, onClick, disabled, className }) {
   return (
     <button
       onClick={onClick}
@@ -11,3 +10,18 @@ export function Button({ children, onClick, disabled, className }) {
     </button>
   );
 }
+
+Button.propTypes = {
+  children: PropTypes.node.isRequired,
+  onClick: PropTypes.func,
+  disabled: PropTypes.bool,
+  className: PropTypes.string,
+};
+
+Button.defaultProps = {
+  onClick: () => {},
+  disabled: false,
+  className: "",
+};
+
+export default Button;

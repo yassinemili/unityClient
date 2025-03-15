@@ -1,7 +1,7 @@
-import * as React from "react";
 import * as AvatarPrimitive from "@radix-ui/react-avatar";
 
-import { cn } from "../../lib/utils";
+import { cx as cn } from "../../lib/utils";
+import PropTypes from "prop-types";
 
 function Avatar({ className, ...props }) {
   return (
@@ -38,5 +38,17 @@ function AvatarFallback({ className, ...props }) {
     />
   );
 }
+
+Avatar.propTypes = {
+  className: PropTypes.string,
+};
+
+AvatarImage.propTypes = {
+  className: PropTypes.string,
+};
+
+AvatarFallback.propTypes = {
+  className: PropTypes.string,
+};
 
 export { Avatar, AvatarImage, AvatarFallback };

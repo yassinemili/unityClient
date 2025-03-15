@@ -1,7 +1,7 @@
-import * as React from "react";
-import * as TabsPrimitive from "@radix-ui/react-tabs";
-import { cn } from "../../lib/utils";
 
+import * as TabsPrimitive from "@radix-ui/react-tabs";
+import { cx as cn } from "../../lib/utils";
+import PropTypes from "prop-types";
 function Tabs({ className, ...props }) {
   return (
     <TabsPrimitive.Root
@@ -47,5 +47,21 @@ function TabsContent({ className, ...props }) {
     />
   );
 }
+
+Tabs.propTypes = {
+  className: PropTypes.string,
+};
+
+TabsList.propTypes = {
+  className: PropTypes.string,
+};
+
+TabsTrigger.propTypes = {
+  className: PropTypes.string,
+};
+
+TabsContent.propTypes = {
+  className: PropTypes.string,
+};
 
 export { Tabs, TabsList, TabsTrigger, TabsContent };

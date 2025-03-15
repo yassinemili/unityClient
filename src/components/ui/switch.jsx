@@ -1,7 +1,7 @@
-import * as React from "react";
 import * as SwitchPrimitive from "@radix-ui/react-switch";
 
-import { cn } from "../../lib/utils";
+import { cx as cn } from "../../lib/utils";
+import PropTypes from "prop-types";
 
 function Switch({ className, ...props }) {
   return (
@@ -22,5 +22,9 @@ function Switch({ className, ...props }) {
     </SwitchPrimitive.Root>
   );
 }
+
+Switch.propTypes = {
+  className: PropTypes.string,
+};
 
 export { Switch };

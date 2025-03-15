@@ -1,6 +1,5 @@
-import * as React from "react";
-
-import { cn } from "@/lib/utils";
+import { cx as cn } from "../../lib/utils";
+import PropTypes from "prop-types";
 
 function Textarea({ className, ...props }) {
   return (
@@ -14,5 +13,9 @@ function Textarea({ className, ...props }) {
     />
   );
 }
+
+Textarea.propTypes = {
+  className: PropTypes.string,
+};
 
 export { Textarea };

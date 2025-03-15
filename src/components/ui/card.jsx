@@ -1,5 +1,5 @@
-import * as React from "react";
-import { cn } from "../../lib/utils";
+import { cx as cn } from "../../lib/utils";
+import PropTypes from "prop-types";
 
 function Card({ className, ...props }) {
   return (
@@ -79,6 +79,34 @@ function CardFooter({ className, ...props }) {
     />
   );
 }
+
+Card.propTypes = {
+  className: PropTypes.string,
+};
+
+CardHeader.propTypes = {
+  className: PropTypes.string,
+};
+
+CardTitle.propTypes = {
+  className: PropTypes.string,
+};
+
+CardDescription.propTypes = {
+  className: PropTypes.string,
+};
+
+CardAction.propTypes = {
+  className: PropTypes.string,
+};
+
+CardContent.propTypes = {
+  className: PropTypes.string,
+};
+
+CardFooter.propTypes = {
+  className: PropTypes.string,
+};
 
 export {
   Card,

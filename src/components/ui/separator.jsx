@@ -1,8 +1,13 @@
-import * as React from "react";
 import * as SeparatorPrimitive from "@radix-ui/react-separator";
-import { cn } from "../../lib/utils";
+import { cx as cn } from "../../lib/utils";
+import PropTypes from "prop-types";
 
-function Separator({ className, orientation = "horizontal", decorative = true, ...props }) {
+function Separator({
+  className,
+  orientation = "horizontal",
+  decorative = true,
+  ...props
+}) {
   return (
     <SeparatorPrimitive.Root
       data-slot="separator-root"
@@ -16,5 +21,12 @@ function Separator({ className, orientation = "horizontal", decorative = true, .
     />
   );
 }
+
+
+Separator.propTypes = {
+  orientation: PropTypes.oneOf(["horizontal", "vertical"]),
+  decorative: PropTypes.bool,
+  className: PropTypes.string,
+};
 
 export { Separator };

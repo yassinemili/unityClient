@@ -1,7 +1,7 @@
-import * as React from "react";
 import * as SelectPrimitive from "@radix-ui/react-select";
 import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from "lucide-react";
-import { cn } from "../../lib/utils";
+import { cx as cn } from "../../lib/utils";
+import PropTypes from "prop-types";
 
 function Select(props) {
   return <SelectPrimitive.Root data-slot="select" {...props} />;
@@ -100,7 +100,10 @@ function SelectScrollUpButton({ className, ...props }) {
   return (
     <SelectPrimitive.ScrollUpButton
       data-slot="select-scroll-up-button"
-      className={cn("flex cursor-default items-center justify-center py-1", className)}
+      className={cn(
+        "flex cursor-default items-center justify-center py-1",
+        className
+      )}
       {...props}
     >
       <ChevronUpIcon className="size-4" />
@@ -112,13 +115,80 @@ function SelectScrollDownButton({ className, ...props }) {
   return (
     <SelectPrimitive.ScrollDownButton
       data-slot="select-scroll-down-button"
-      className={cn("flex cursor-default items-center justify-center py-1", className)}
+      className={cn(
+        "flex cursor-default items-center justify-center py-1",
+        className
+      )}
       {...props}
     >
       <ChevronDownIcon className="size-4" />
     </SelectPrimitive.ScrollDownButton>
   );
 }
+
+SelectContent.propTypes = {
+  position: PropTypes.oneOf(["popper", "absolute"]),
+  className: PropTypes.string,
+};
+
+SelectItem.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
+SelectSeparator.propTypes = {
+  children: PropTypes.node,
+};
+
+Select.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
+SelectGroup.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
+SelectValue.propTypes = {
+  children: PropTypes.node.isRequired,
+  className: PropTypes.string,
+};
+
+SelectTrigger.propTypes = {
+  children: PropTypes.node.isRequired,
+  className: PropTypes.string,
+};
+
+SelectSeparator.propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string,
+};
+
+SelectContent.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
+SelectLabel.propTypes = {
+  children: PropTypes.node.isRequired,
+  className: PropTypes.string,
+};
+
+SelectItem.propTypes = {
+  children: PropTypes.node.isRequired,
+  className: PropTypes.string,
+};
+
+SelectScrollUpButton.propTypes = {
+  children: PropTypes.node.isRequired,
+  className: PropTypes.string,
+};
+
+SelectScrollDownButton.propTypes = {
+  children: PropTypes.node.isRequired,
+  className: PropTypes.string,
+};
+
+SelectContent.defaultProps = {
+  position: "popper",
+};
 
 export {
   Select,
