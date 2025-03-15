@@ -1,4 +1,3 @@
-// src/hooks/useAuth.js
 import { useContext, createContext } from "react";
 
 export const AuthContext = createContext();
