@@ -5,9 +5,11 @@ import RegisterLayout from "../layouts/RegisterLayout.jsx";
 
 import NotFound from "../pages/NotFound.jsx";
 import Login from "../pages/login.jsx";
-import Profiledit from "../pages/profile/page.jsx";
+import Profiledit from "../pages/profile/UserProfileEdit.jsx";
 import CompanyRegister from "../pages/registerations/CompanyRegister.jsx";
 import EmployeeRegister from "../pages/registerations/EmployeeRegister.jsx";
+import ProtectedRoute from "../context/protectedRoute.jsx";
+import DashboardLayout from "../layouts/dashboardLayout.jsx";
 
 export const router = createBrowserRouter([
   {
@@ -16,38 +18,41 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/profile/edit",
-        element: <Profiledit />
-      }
-      // {
-      //   path: "dashboard",
-      //   element: <ProtectedRoute element={<DashboardLayout />} />,
-      //   children: [
-      //     { path: "", element: <Dashboard /> },
-      //   ],
-      // },
-      // {
-      //   path: "company",
-      //   element: <ProtectedRoute element={<DashboardLayout />} />,
-      //   children: [
-      //     { path: "employees/:employeeId", element: <EmployeeDetails /> },
-      //   ],
-      // },
-      // {
-      //   path: "announcements",
-      //   element: <ProtectedRoute element={<DashboardLayout />} />,
-      //   children: [
-      //     { path: "", element: <Announcements /> },
-      //     {
-      //       path: "create",
-      //       element: (
-      //         <ProtectedRoute
-      //           element={<CreateAnnouncement />}
-      //           roles={["owner", "admin"]}
-      //         />
-      //       ),
-      //     },
-      //   ],
-      // },
+        element: <Profiledit />,
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: (
+      <ProtectedRoute
+        element={<DashboardLayout />}
+        roles={["Owner", "Admin", "Emloyee"]}
+      />
+    ),
+    children: [
+      /*       { index: true, element: <Dashboard /> },
+      {
+        path: "company",
+        children: [
+          { path: "employees/:employeeId", element: <EmployeeDetails /> },
+        ],
+      },
+      {
+        path: "announcements",
+        children: [
+          { index: true, element: <Announcements /> },
+          {
+            path: "create",
+            element: (
+              <ProtectedRoute
+                element={<CreateAnnouncement />}
+                roles={["owner", "admin"]}
+              />
+            ),
+          },
+        ],
+      }, */
     ],
   },
   {
