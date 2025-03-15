@@ -1,4 +1,3 @@
-import React from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -16,11 +15,12 @@ import {
 import { ArrowUpRight, Monitor, Moon, Sun } from "lucide-react";
 import PropTypes from "prop-types";
 import { Link } from "react-router";
+import { useState, useEffect } from "react";
 
 export function DropdownUserProfile({ children, align = "start" }) {
-  const [mounted, setMounted] = React.useState(false);
+  const [mounted, setMounted] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setMounted(true);
   }, []);
 
