@@ -10,7 +10,7 @@ import {
 } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import MobileSidebar from "./MobileSidebar";
-import { UserProfileDesktop, UserProfileMobile } from "./UserProfile";
+import { UserProfileDesktop, UserProfileMobile } from "./userProfile";
 import PropTypes from "prop-types";
 
 const navigation = [
@@ -44,7 +44,7 @@ export default function Sidebar({ isCollapsed, toggleSidebar }) {
       <nav
         className={cx(
           isCollapsed ? "lg:w-[60px]" : "lg:w-64",
-          "hidden overflow-x-hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:flex-col",
+          "hidden overflow-x-hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:flex-col w-full",
           "ease transform-gpu transition-all duration-100 will-change-transform"
         )}
       >
@@ -73,9 +73,9 @@ export default function Sidebar({ isCollapsed, toggleSidebar }) {
                   isCollapsed ? "opacity-0" : "opacity-100"
                 )}
               >
-                <a aria-label="Home Link" href="/">
+                <Link aria-label="Home Link" href="/">
                   Acme Corp.
-                </a>
+                </Link>
               </span>
             </div>
           </div>
@@ -210,9 +210,9 @@ export default function Sidebar({ isCollapsed, toggleSidebar }) {
             isCollapsed ? "opacity-0" : "opacity-100"
           )}
         >
-          <a aria-label="Home Link" href="/">
-            Acme Corp.
-          </a>
+          <Link aria-label="Home Link" to="/">
+            Unity.
+          </Link>
         </span>
         <div className="flex items-center gap-1 sm:gap-2">
           <UserProfileMobile />
