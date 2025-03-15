@@ -1,5 +1,6 @@
 import { useAuth } from "../hooks/useAuth";
 import { Popover, PopoverButton, PopoverPanel } from "@headlessui/react";
+import { Link } from "react-router";
 
 const Avatar = () => {
   const { user, logout } = useAuth();
@@ -31,12 +32,15 @@ const Avatar = () => {
           </p>
         </div>
         <div className="border-t border-gray-200">
-          <button className="block w-full px-4 py-2 text-left text-sm text-neutral-700 hover:bg-neutral-100">
+          <Link className="block w-full px-4 py-2 text-left text-sm text-neutral-700 hover:bg-neutral-100">
             My Profile
-          </button>
-          <button className="block w-full px-4 py-2 text-left text-sm text-neutral-700 hover:bg-neutral-100">
+          </Link>
+          <Link
+            to="dashboard"
+            className="block w-full px-4 py-2 text-left text-sm text-neutral-700 hover:bg-neutral-100"
+          >
             Dashboard
-          </button>
+          </Link>
           <button
             onClick={handleLogout}
             className="block w-full px-4 py-2 text-left text-sm text-red-600 hover:bg-gray-100"
